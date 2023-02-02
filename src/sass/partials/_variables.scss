@@ -1,0 +1,27 @@
+/* Variables */
+
+$color-dark: #131313;
+$color-light: #fff;
+$color-main: #cf383e;
+$color-grey: #bfbfbf;
+
+
+$font-text: 'Source Sans Pro', sans-serif;
+
+
+$font-normal: 400;
+$font-semibold: 600;
+$font-bold: 700;
+
+$transition: all .3s;
+$radius: 4px;
+
+$base-size: 12px;
+
+
+@mixin flex($flex-direction, $align-items, $justify-content) {
+  display: flex;
+  flex-direction: $flex-direction;
+  align-items: $align-items;
+  justify-content: $justify-content;
+}
