@@ -1,3 +1,6 @@
+
+
+import Song from './Components/song.js';
 import {settings} from './settings.js';
 
 const app = {
@@ -15,7 +18,7 @@ const app = {
         console.log('parsedResponse', parsedResponse);
           
         thisApp.data.songs = parsedResponse;
-        // thisApp.initMenu();
+        thisApp.initMenu();
         console.log('parsedResponse',parsedResponse);
 
       });
@@ -24,9 +27,27 @@ const app = {
 
 
   },
+  initMenu:function(){
+
+  
+    const thisApp= this;
+
+    console.log('thisApp.data', thisApp.data);
+  
+
+    for(let songData in thisApp.data.songs){
+      new Song(songData, thisApp.data.songs[songData]);
+      
+      
+    }
+    
+  },
   init: function(){
     const thisApp = this;
+
     thisApp.initData();
+
+   
 
     console.log('*** App starting ***');
     console.log('thisApp:', thisApp);

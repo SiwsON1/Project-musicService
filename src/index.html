@@ -36,12 +36,13 @@
     <div class="audio-player">
       <h2>{{title}}</h2>
       <audio controls>
-        <source src="{{src}}" type="audio/mpeg">
+        <source src="./songs/{{src}}" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
     </div>
   </script>
-  <script src="js/script.js" type="module"></script>
   <script src="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/js/green-audio-player.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+  <script src="js/script.js" type="module"></script>
 </body>
 </html>

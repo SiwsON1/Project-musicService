@@ -1,23 +1,16 @@
+export const select = {
+  templateOf: {
+    songList: '#audio-template',
+     
+  },
+  containerOf: {
+    song: '#song-list',
+    
+  },
+};
+
 export const settings = {
-  amountWidget: {
-    defaultValue: 1,
-    defaultMin: 1,
-    defaultMax: 9,
-  }, // CODE CHANGED
-  // CODE ADDED START
-  cart: {
-    defaultDeliveryFee: 20,
-  },
-  hours: {
-    open: 12,
-    close: 24,
-  },
-  datePicker: {
-    maxDaysInFuture: 14,
-  },
-  booking: {
-    tableIdAttribute: 'data-table',
-  },
+ 
   db: {
     url: '//' + window.location.hostname + (window.location.hostname=='localhost' ? ':3131' : ''),
     songs: 'songs',
@@ -27,4 +20,10 @@ export const settings = {
     repeatParam: 'repeat_ne=false',
   },
   // CODE ADDED END
+};
+
+export const templates = {
+  songList: Handlebars.compile(document.querySelector(select.templateOf.songList).innerHTML),
+  
+
 };
