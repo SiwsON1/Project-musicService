@@ -42,10 +42,12 @@ const app = {
     }
     
   },
+ 
   init: function(){
     const thisApp = this;
 
     thisApp.initData();
+    
 
    
 
@@ -53,6 +55,7 @@ const app = {
     console.log('thisApp:', thisApp);
    
   },
+
 };
 
 app.init();

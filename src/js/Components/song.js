@@ -2,6 +2,7 @@ import {select, templates} from '../settings.js';
 import utils from '../utils.js';
 
 
+
 class Song{
   constructor(id, data){
     const thisSong = this;
@@ -14,7 +15,10 @@ class Song{
 
     console.log('new Song', thisSong);
     thisSong.renderInMenu();
-      
+    thisSong.getElements();
+    
+    thisSong.initGreenAudioPlayer();
+   
 
       
   }
@@ -32,7 +36,39 @@ class Song{
 
     /* add element to menu */
     songContainer.appendChild(thisSong.element);
+    
+    console.log('thisSong.element',thisSong.element);
+  }
+
+  getElements(){
+    const thisSong = this;
+    
+    thisSong.songList = document.querySelector('.song-list');
+    console.log('thisSong.songList', thisSong.songList);
+
+
+    
+  }
+  
+    
+
+  initGreenAudioPlayer(){
+    const thisSong = this;
+
+    const currentDivs = thisSong.songList.getElementsByClassName('audio-wrapper');
+
+    console.log('ilosc',currentDivs.length);
+
+    if (currentDivs.length == '4') {
+
+      GreenAudioPlayer.init({ // eslint-disable-line
+        selector: '.audio-player',
+        stopOthersOnPlay: true
+      });
+    }
+
+   
+ 
   }
 }
-
 export default Song;
