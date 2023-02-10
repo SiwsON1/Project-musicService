@@ -5,7 +5,17 @@ export const select = {
   },
   containerOf: {
     song: '#song-list',
+    pages: '#pages',
+    search: '#search-wrapper',
+    discover: '#discover-wrapper',
+  },
+  nav: {
+    links: '.main-nav a',
     
+  },
+  search: {
+    input: '#song-input',
+    btn: '#search-button',
   },
 };
 
@@ -26,4 +36,14 @@ export const templates = {
   songList: Handlebars.compile(document.querySelector(select.templateOf.songList).innerHTML),
   
 
+};
+export const classNames = {
+
+  nav: {
+    active: 'active',
+  },
+  pages: {
+    active: 'active',
+  }
+  // CODE ADDED END
 };

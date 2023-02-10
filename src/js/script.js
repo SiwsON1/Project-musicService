@@ -1,9 +1,81 @@
-
-
+import DiscoverSong from './Components/FilteredSong.js';
+import FilteredSong from './Components/FilteredSong.js';
 import Song from './Components/song.js';
-import {settings} from './settings.js';
+import {settings, select, classNames} from './settings.js';
 
 const app = {
+  initSearch:function(){
+    const thisApp = this;
+
+    thisApp.searchButton = document.querySelector(select.search.btn);
+    thisApp.input = document.querySelector(select.search.input);
+    const searchContainer = document.querySelector(select.containerOf.search);
+    
+
+    thisApp.searchButton.addEventListener('click', event => {
+      event.preventDefault();
+      const searchValue = thisApp.input.value;
+      let lowerSearchValue = searchValue.toLowerCase();
+
+      thisApp.data.songs.forEach(song => {
+        song.title = song.title.toLowerCase();
+      });
+
+      let filteredSongs =  thisApp.data.songs.filter(song => {
+        return song.title.includes(lowerSearchValue);
+      });
+
+      for(let songData in filteredSongs){
+        new FilteredSong(songData, filteredSongs[songData], searchContainer);
+      }
+    });
+  },
+  
+  initPages: function(){
+    const thisApp = this;
+    thisApp.pages = document.querySelector(select.containerOf.pages).children;
+    thisApp.navLinks = document.querySelectorAll(select.nav.links);
+    
+
+    const idFromHash = window.location.hash.replace('#/', '');
+
+    let pageMatchingHash = thisApp.pages[0].id;
+
+    for(let page of thisApp.pages){
+      if(page.id == idFromHash){
+        pageMatchingHash = page.id;
+      }
+
+    }
+
+    thisApp.activatePage(pageMatchingHash);
+
+    for(let link of thisApp.navLinks){
+      link.addEventListener('click', function(event){
+        const clickedElement = this;
+        event.preventDefault();
+        const id = clickedElement.getAttribute('href').replace('#', '');
+        
+        thisApp.activatePage(id);
+        window.location.hash = '#/' + id;
+      });
+    }
+
+
+  },
+  activatePage: function(pageId){
+    const thisApp = this;
+
+    for(let page of thisApp.pages){
+      
+      page.classList.toggle(classNames.pages.active, page.id == pageId);
+    }
+
+    for(let link of thisApp.navLinks){
+      
+      link.classList.toggle(classNames.nav.active, link.getAttribute('href') == '#' + pageId);
+    }
+  },
   initData: function(){
     const thisApp= this;
 
@@ -18,7 +90,9 @@ const app = {
         console.log('parsedResponse', parsedResponse);
           
         thisApp.data.songs = parsedResponse;
+        
         thisApp.initMenu();
+        
         console.log('parsedResponse',parsedResponse);
 
       });
@@ -31,15 +105,22 @@ const app = {
 
   
     const thisApp= this;
+    
 
     console.log('thisApp.data', thisApp.data);
   
 
     for(let songData in thisApp.data.songs){
-      new Song(songData, thisApp.data.songs[songData]);
+      new Song(songData, thisApp.data.songs[songData], thisApp.data.songs);
       
       
     }
+    
+    const discoverContainer = document.querySelector(select.containerOf.discover);
+    const randomIndex = Math.floor(Math.random() * 4);
+    
+    
+    new DiscoverSong( randomIndex, thisApp.data.songs[randomIndex], discoverContainer);
     
   },
  
@@ -47,8 +128,9 @@ const app = {
     const thisApp = this;
 
     thisApp.initData();
-    
-
+    thisApp.initPages();
+    thisApp.initSearch();
+    //thisApp.InitDiscover();
    
 
     console.log('*** App starting ***');

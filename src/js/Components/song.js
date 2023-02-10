@@ -1,25 +1,32 @@
+
 import {select, templates} from '../settings.js';
 import utils from '../utils.js';
 
 
 
+
 class Song{
-  constructor(id, data){
+ 
+
+  constructor(id, data, songlist){
     const thisSong = this;
 
     thisSong.id = id;
     thisSong.data = data;
-    console.log(thisSong.id, thisSong.data);
+    console.log(' id i data',thisSong.id, thisSong.data);
 
+    thisSong.songlist = songlist;
     
-
-    console.log('new Song', thisSong);
+    
+    
+   
     thisSong.renderInMenu();
     thisSong.getElements();
     
     thisSong.initGreenAudioPlayer();
-   
 
+    
+   
       
   }
   renderInMenu(){
@@ -33,19 +40,25 @@ class Song{
       
     /* find menu container */
     const songContainer = document.querySelector(select.containerOf.song);
-
+   
     /* add element to menu */
     songContainer.appendChild(thisSong.element);
+
     
+
     console.log('thisSong.element',thisSong.element);
   }
+ 
 
   getElements(){
     const thisSong = this;
     
     thisSong.songList = document.querySelector('.song-list');
     console.log('thisSong.songList', thisSong.songList);
-
+    thisSong.input = document.querySelector(select.search.input);
+    thisSong.searchButton = document.querySelector(select.search.btn);
+    thisSong.Allsongs =[];
+    thisSong.searchContainer = document.querySelector(select.containerOf.search);
 
     
   }
@@ -59,7 +72,10 @@ class Song{
 
     console.log('ilosc',currentDivs.length);
 
-    if (currentDivs.length == '4') {
+
+   
+
+    if (currentDivs.length == '5') {
 
       GreenAudioPlayer.init({ // eslint-disable-line
         selector: '.audio-player',
@@ -70,5 +86,14 @@ class Song{
    
  
   }
+  
+
+
+    
+    
+
+  
+  
+  
 }
 export default Song;
