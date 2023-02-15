@@ -23,7 +23,7 @@
       <div class="main-nav">
         <a href="#home">Home</a>
         <a href="#search">Search</a>
-        <a href="#discover">Discover</a>
+        <a href="#discover" id ="discover-btn">Discover</a>
       </div>
     </div>
   </header>
@@ -48,21 +48,30 @@
     </section>
     <section id="search">
       <div class="form">
-        <h3>Search</h3>
+        <h3>SEARCH</h3>
+        <label for="song-input">Name</label>
         <input type="text" id="song-input">
-        <button id="search-button" type="submit" value="Submit">Search</button>
+        <button id="search-button" class="btn1" type="submit" value="Submit">SEARCH</button>
+        <p id="foundText"></p>
       </div>
       <div id ="search-wrapper" class="search-wrapper container"></div>
     </section>
     <section id="discover">
-      123
+      <h3 id ="discover-title">DISCOVER</h3>
+      <p id="try-text">Give it a try!</p>
       <div id ="discover-wrapper" class="discover-wrapper container"></div>
     </section>
   </div>
+  <footer class="page-footer">
+    <div class="container">
+      <h2 class="footer__title">All rights reserved</h3>
+    </div>
+</footer>
   <script id="audio-template" type="text/x-handlebars-template">
+    
     <div class="audio-wrapper">
       <h3 class ="song-title">{{title}}</h3>
-    <div class="audio-player">
+    <div class="audio-player-{{id}}-{{counter}}" >
       <audio>
         <source src="./songs/{{filename}}" type="audio/mpeg">
       </audio>
@@ -72,6 +81,7 @@
       <p># {{ranking}} In the Ranking</p>
     </div>
   </div>
+  
   </script>
   <script src="https://cdn.jsdelivr.net/gh/greghub/green-audio-player/dist/js/green-audio-player.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>

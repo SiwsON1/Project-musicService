@@ -17,6 +17,9 @@ export const select = {
     input: '#song-input',
     btn: '#search-button',
   },
+  discover:{
+    btn: '#discover-btn'
+  },
 };
 
 export const settings = {

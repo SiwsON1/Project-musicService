@@ -9,12 +9,12 @@ class DiscoverSong {
     
 
     const thisFilteredSong = this;
-   
+    thisFilteredSong.id = id;
     thisFilteredSong.data = data;
     //this.FilteredSong.songList = songlist;
-    thisFilteredSong.initialized = false;
+    
 
-    console.log('data tooooooooooooo',thisFilteredSong.data);
+    console.log('data tooooooooooooo',thisFilteredSong.data.id);
 
     
     thisFilteredSong.renderInMenu(element);
@@ -47,10 +47,7 @@ class DiscoverSong {
     /* add element to menu */
     //songContainer.appendChild(this.FilteredSong.element);
 
-    if (!thisFilteredSong.initialized) {
-      thisFilteredSong.initialized = true;
-      thisFilteredSong.initGreenAudioPlayer();
-    }
+   
    
   }
   

@@ -1,6 +1,5 @@
-import DiscoverSong from './Components/FilteredSong.js';
+
 import FilteredSong from './Components/FilteredSong.js';
-import Song from './Components/song.js';
 import {settings, select, classNames} from './settings.js';
 
 const app = {
@@ -10,25 +9,42 @@ const app = {
     thisApp.searchButton = document.querySelector(select.search.btn);
     thisApp.input = document.querySelector(select.search.input);
     const searchContainer = document.querySelector(select.containerOf.search);
-    
+    thisApp.discoverButton = document.querySelector(select.discover.btn);
+    let songCounter = 0;
 
     thisApp.searchButton.addEventListener('click', event => {
       event.preventDefault();
       const searchValue = thisApp.input.value;
       let lowerSearchValue = searchValue.toLowerCase();
 
-      thisApp.data.songs.forEach(song => {
-        song.title = song.title.toLowerCase();
-      });
+     
 
       let filteredSongs =  thisApp.data.songs.filter(song => {
-        return song.title.includes(lowerSearchValue);
+        return song.title.toLowerCase().includes(lowerSearchValue);
       });
 
       for(let songData in filteredSongs){
         new FilteredSong(songData, filteredSongs[songData], searchContainer);
+        songCounter++;
+        console.log(songCounter);
       }
+
+      // wybieramy element HTML, do którego chcemy wstawić napis
+      let myText = document.getElementById('foundText');
+
+      // tworzymy napis, który łączy tekst z zmienną
+      let message = `We have found ${songCounter} songs...`;
+
+      // wstawiamy napis do elementu HTML
+      myText.innerHTML = message;
+
     });
+
+    
+
+    
+
+    
   },
   
   initPages: function(){
@@ -108,20 +124,25 @@ const app = {
     
 
     console.log('thisApp.data', thisApp.data);
-  
+    const filteredContainer = document.querySelector(select.containerOf.song);
+    let songCounter = 0;
 
     for(let songData in thisApp.data.songs){
-      new Song(songData, thisApp.data.songs[songData], thisApp.data.songs);
+
       
+      
+      
+
+      new FilteredSong(songCounter, thisApp.data.songs[songData], filteredContainer);
+      songCounter++;
       
     }
     
+    console.log('dłuuuugoooość',thisApp.data.songs.length);
     const discoverContainer = document.querySelector(select.containerOf.discover);
-    const randomIndex = Math.floor(Math.random() * 4);
-    
-    
-    new DiscoverSong( randomIndex, thisApp.data.songs[randomIndex], discoverContainer);
-    
+    const randomIndex = Math.floor(Math.random() * thisApp.data.songs.length);
+    new FilteredSong(songCounter, thisApp.data.songs[randomIndex], discoverContainer);
+    songCounter++;
   },
  
   init: function(){

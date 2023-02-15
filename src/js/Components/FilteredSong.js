@@ -4,21 +4,24 @@ import utils from '../utils.js';
 
 
 
+
 class FilteredSong {
-  constructor(id,data , element) {
+  constructor(songCounter,data , element) {
+    
+    
+    const thisFilteredSong = this;
+    thisFilteredSong.songCounter = songCounter;
+    thisFilteredSong.data = data;
+
+    thisFilteredSong.data.counter = thisFilteredSong.songCounter;
+
     
 
-    const thisFilteredSong = this;
-    thisFilteredSong.id = id;
-    thisFilteredSong.data = data;
-    //this.FilteredSong.songList = songlist;
-    thisFilteredSong.initialized = false;
-
-    console.log('data tooooooooooooo',thisFilteredSong.data);
+    console.log('wystąpienia o',thisFilteredSong.songCounter);
 
     
     thisFilteredSong.renderInMenu(element);
-    
+    thisFilteredSong.initGreenAudioPlayer();
     
     
     
@@ -28,14 +31,19 @@ class FilteredSong {
   renderInMenu(element) {
     // Przefiltrowanie piosenek
     const thisFilteredSong = this;
-   
+    
+    
 
-    const generatedHTML = templates.songList(thisFilteredSong.data);
+    const generatedHTML = templates.songList(
+      thisFilteredSong.data
+  
+    );
     console.log(generatedHTML);
 
     thisFilteredSong.nodeElement = utils.createDOMFromHTML(generatedHTML);
 
     thisFilteredSong.wrapper = element;
+    console.log('wrapper to', thisFilteredSong.nodeElement);
 
     thisFilteredSong.wrapper.appendChild(thisFilteredSong.nodeElement);
     /* create element using utils.createElementFromHTML */
@@ -47,22 +55,24 @@ class FilteredSong {
     /* add element to menu */
     //songContainer.appendChild(this.FilteredSong.element);
 
-    if (!thisFilteredSong.initialized) {
-      thisFilteredSong.initialized = true;
-      thisFilteredSong.initGreenAudioPlayer();
-    }
+    
    
   }
   
   
   initGreenAudioPlayer(){
     
-    
+    const thisFilteredSong = this;
+ 
+
+
     GreenAudioPlayer.init({ // eslint-disable-line
-      selector: '.audio-player',
-      stopOthersOnPlay: true
+      selector:'.audio-player' + '-' + thisFilteredSong.data.id + '-' + thisFilteredSong.data.counter,
+      stopOthersOnPlay: true,
+      
     });
     
+    console.log('siemankooo tooo', '.audio-player' + '-' + thisFilteredSong.data.id+ '-' + thisFilteredSong.data.counter);
     
     
   

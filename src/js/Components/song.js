@@ -8,14 +8,14 @@ import utils from '../utils.js';
 class Song{
  
 
-  constructor(id, data, songlist){
+  constructor(id, data){
     const thisSong = this;
 
     thisSong.id = id;
     thisSong.data = data;
     console.log(' id i data',thisSong.id, thisSong.data);
 
-    thisSong.songlist = songlist;
+    
     
     
     
@@ -54,11 +54,9 @@ class Song{
     const thisSong = this;
     
     thisSong.songList = document.querySelector('.song-list');
-    console.log('thisSong.songList', thisSong.songList);
-    thisSong.input = document.querySelector(select.search.input);
-    thisSong.searchButton = document.querySelector(select.search.btn);
-    thisSong.Allsongs =[];
-    thisSong.searchContainer = document.querySelector(select.containerOf.search);
+   
+   
+   
 
     
   }
